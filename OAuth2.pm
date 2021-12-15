@@ -11,7 +11,7 @@ use Plack::App::Login;
 use Plack::Response;
 use Plack::Session;
 use Plack::Util::Accessor qw(app_login app_login_url client_id client_secret
-	redirect_path service_provider);
+	redirect_path scope service_provider);
 
 our $VERSION = 0.01;
 
@@ -166,7 +166,7 @@ sub _create_oauth2_object {
 		'client_id' => $self->client_id,
 		'client_secret' => $self->client_secret,
 		'redirect_uri' => $redirect_uri,
-		'scope' => $self->{'scope'} || 'profile email',
+		$self->scope ? ('scope' => $self->scope) : (),
 		$self->service_provider ? ('service_provider' => $self->service_provider) : (),
 	);
 	$session->set('oauth2', $oauth2);
