@@ -1,5 +1,5 @@
 ---
-abstract: 'Plack middleware for creating of LWP::Authen::OAuth2 object.'
+abstract: 'Plack OAuth2 middleware.'
 author:
   - 'Michal Josef Spacek <skim@cpan.org>'
 build_requires:
@@ -19,7 +19,7 @@ license: bsd
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
-name: Plack-Middleware-Object-LWP-Authen-OAuth2
+name: Plack-Middleware-Auth-OAuth2
 no_index:
   directory:
     - inc
@@ -27,12 +27,14 @@ no_index:
     - xt
 requires:
   Error::Pure: 0
+  JSON::XS: 0
   LWP::Authen::OAuth2: 0
+  Plack::Response: 0
   Plack::Session: 0
   perl: 5.8.0
 resources:
-  bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Plack-Middleware-Object-LWP-Authen-OAuth2
-  homepage: https://github.com/michal-josef-spacek/Plack-Middleware-Object-LWP-Authen-OAuth2
+  bugtracker: https://github.com/michal-josef-spacek/Plack-Middleware-Auth-OAuth2/issues
+  homepage: https://github.com/michal-josef-spacek/Plack-Middleware-Auth-OAuth2
   license: http://opensource.org/licenses/bsd-license.php
-  repository: git://github.com/michal-josef-spacek/Plack-Middleware-Object-LWP-Authen-OAuth2
+  repository: git://github.com/michal-josef-spacek/Plack-Middleware-Auth-OAuth2
 version: '0.01'
