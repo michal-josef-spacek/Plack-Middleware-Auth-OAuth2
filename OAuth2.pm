@@ -173,6 +173,7 @@ sub _create_oauth2_object {
 
 	return;
 }
+
 1;
 
 __END__
