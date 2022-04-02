@@ -159,6 +159,7 @@ sub _create_oauth2_object {
 	$redirect_uri .= '/'.$redirect_path;
 
 	# Create object.
+	# TODO Check creating of object?
 	my $oauth2 = LWP::Authen::OAuth2->new(
 		'client_id' => $self->client_id,
 		'client_secret' => $self->client_secret,
