@@ -19,6 +19,7 @@ sub call {
 	my ($self, $env) = @_;
 
 	my $session = Plack::Session->new($env);
+	my $path_info = $env->{'PATH_INFO'};
 
 	# Check.
 	$self->_check_run($env);
@@ -27,7 +28,7 @@ sub call {
 	$self->_create_oauth2_object($env);
 
 	# Auth page.
-	if ($env->{'PATH_INFO'} eq '/'.$self->redirect_path) {
+	if ($path_info eq '/'.$self->redirect_path) {
 		return $self->_auth_code_app->($env);
 	}
 
