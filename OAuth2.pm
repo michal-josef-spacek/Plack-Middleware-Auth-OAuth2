@@ -117,10 +117,10 @@ sub _authorized {
 
 	my $session = Plack::Session->new($env);
 
-        # No token string
-        if (! defined $session->get('token_string')) {
-                return 0;
-        }
+	# No token string.
+	if (! defined $session->get('token_string')) {
+		return 0;
+	}
 
 	if (! defined $session->get('oauth2')) {
 		return 0;
