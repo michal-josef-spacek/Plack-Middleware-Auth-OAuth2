@@ -35,17 +35,17 @@ sub call {
 	# Check authorized.
 	my $authorized = $self->_authorized($env);
 
+	# Application after authorization.
+	if ($authorized) {
+		return $self->app->($env);
+
 	# Unauthorized page.
-	if (! $authorized) {
+	} else {
 		# TODO Nemel bych tady predat nejake dalsi veci?
 
 		$self->app_login_url->($self->app_login,
 			$session->get('oauth2')->authorization_url);
 		return $self->app_login->to_app->($env);
-
-	# Application after authorization.
-	} else {
-		return $self->app->($env);
 	}
 }
 
