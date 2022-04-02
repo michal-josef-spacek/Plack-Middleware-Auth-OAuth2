@@ -170,6 +170,9 @@ sub _create_oauth2_object {
 	);
 	$session->set('oauth2', $oauth2);
 
+	# Save service provider to session.
+	$session->set('oauth2.service_provider', $self->service_provider);
+
 	return;
 }
 
