@@ -125,14 +125,6 @@ sub _authorized {
 	if (! defined $session->get('oauth2')) {
 		return 0;
 	}
-	my $oauth2 = $session->get('oauth2');
-
-        my $res = $oauth2->get('https://www.googleapis.com/userinfo/v2/me');
-        if (! $res->is_success) {
-                return 0;
-        }
-
-	my $profile_hr = JSON::XS->new->decode($res->decoded_content);
 
 	return 1;
 }
