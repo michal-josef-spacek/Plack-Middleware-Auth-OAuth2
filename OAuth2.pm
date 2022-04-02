@@ -74,6 +74,10 @@ sub prepare_app {
 		err 'No redirect path.';
 	}
 
+	if (! defined $self->service_provider) {
+		err 'No service provider.';
+	}
+
 	return;
 }
 
@@ -168,7 +172,7 @@ sub _create_oauth2_object {
 		'client_secret' => $self->client_secret,
 		'redirect_uri' => $redirect_uri,
 		$self->scope ? ('scope' => $self->scope) : (),
-		$self->service_provider ? ('service_provider' => $self->service_provider) : (),
+		'service_provider' => $self->service_provider,
 	);
 	$session->set('oauth2', $oauth2);
 
