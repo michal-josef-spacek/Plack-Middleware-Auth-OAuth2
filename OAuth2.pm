@@ -122,6 +122,7 @@ sub _authorized {
 		return 0;
 	}
 
+	# No OAuth2 object.
 	if (! defined $session->get('oauth2')) {
 		return 0;
 	}
