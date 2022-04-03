@@ -1,7 +1,9 @@
 TODO
 ====
 3. Check creating of oauth2 object.
-4.
+4. How to handle errors in call()? Better is not used err, but PSGI return
+array.
+5.
 
 Applied
 =======
