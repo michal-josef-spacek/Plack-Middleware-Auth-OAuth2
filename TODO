@@ -3,7 +3,9 @@ TODO
 3. Check creating of oauth2 object.
 4. How to handle errors in call()? Better is not used err, but PSGI return
 array.
-5.
+5. Tests with Test::LWP::UserAgent.
+LWP::Authen::OAuth2->set_user_agent();
+6.
 
 Applied
 =======
