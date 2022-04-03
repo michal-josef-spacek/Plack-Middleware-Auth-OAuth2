@@ -12,7 +12,7 @@ use Plack::App::Login;
 use Plack::Response;
 use Plack::Session;
 use Plack::Util::Accessor qw(app_login app_login_url client_id client_secret
-	redirect_path scope service_provider);
+	lwp_user_agent redirect_path scope service_provider);
 
 our $VERSION = 0.01;
 
@@ -174,6 +174,9 @@ sub _create_oauth2_object {
 		err "Cannot create OAuth2 object.",
 			'Error', $EVAL_ERROR,
 		;
+	}
+	if ($self->lwp_user_agent) {
+		$oauth2->set_user_agent($self->lwp_user_agent);
 	}
 	$session->set('oauth2', $oauth2);
 
