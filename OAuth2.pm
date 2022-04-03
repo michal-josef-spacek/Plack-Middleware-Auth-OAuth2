@@ -4,6 +4,7 @@ use base qw(Plack::Middleware);
 use strict;
 use warnings;
 
+use English;
 use Error::Pure qw(err);
 use JSON::XS;
 use LWP::Authen::OAuth2;
@@ -160,14 +161,20 @@ sub _create_oauth2_object {
 	$redirect_uri .= '/'.$redirect_path;
 
 	# Create object.
-	# TODO Check creating of object?
-	my $oauth2 = LWP::Authen::OAuth2->new(
-		'client_id' => $self->client_id,
-		'client_secret' => $self->client_secret,
-		'redirect_uri' => $redirect_uri,
-		$self->scope ? ('scope' => $self->scope) : (),
-		'service_provider' => $self->service_provider,
-	);
+	my $oauth2 = eval {
+		LWP::Authen::OAuth2->new(
+			'client_id' => $self->client_id,
+			'client_secret' => $self->client_secret,
+			'redirect_uri' => $redirect_uri,
+			$self->scope ? ('scope' => $self->scope) : (),
+			'service_provider' => $self->service_provider,
+		);
+	};
+	if ($EVAL_ERROR) {
+		err "Cannot create OAuth2 object.",
+			'Error', $EVAL_ERROR,
+		;
+	}
 	$session->set('oauth2', $oauth2);
 
 	# Save service provider to session.

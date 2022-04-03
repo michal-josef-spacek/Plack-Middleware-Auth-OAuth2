@@ -18,6 +18,7 @@ name 'Plack-Middleware-Auth-OAuth2';
 perl_version 5.008;
 readme_from 'OAuth2.pm';
 recursive_author_tests('xt');
+requires 'English' => 0;
 requires 'Error::Pure' => 0;
 requires 'JSON::XS' => 0;
 requires 'LWP::Authen::OAuth2' => 0;
