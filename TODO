@@ -5,7 +5,6 @@ TODO
 array.
 5. Tests with Test::LWP::UserAgent.
 LWP::Authen::OAuth2->set_user_agent();
-6. Some better naming of session parameters for oauth2?
 7.
 
 Applied
@@ -17,3 +16,9 @@ OK [20220402] skim
 
 2. Remove googleapis part
 OK [20220402] skim
+
+6. Some better naming of session parameters for oauth2?
+oauth2.obj
+oauth2.token_string
+oauth2.service_provider
+OK [20220405] skim

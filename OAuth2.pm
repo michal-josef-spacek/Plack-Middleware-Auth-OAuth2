@@ -50,7 +50,7 @@ sub call {
 		# TODO Nemel bych tady predat nejake dalsi veci?
 
 		$self->app_login_url->($self->app_login,
-			$session->get('oauth2')->authorization_url);
+			$session->get('oauth2.obj')->authorization_url);
 		return $self->app_login->to_app->($env);
 	}
 }
@@ -108,11 +108,11 @@ sub _app_auth_code {
 				['No OAuth2 code.'],
 			];
 		}
-		$session->get('oauth2')->request_tokens('code' => $oauth2_code);
+		$session->get('oauth2.obj')->request_tokens('code' => $oauth2_code);
 
-		my $token_string_json = $session->get('oauth2')->token_string;
+		my $token_string_json = $session->get('oauth2.obj')->token_string;
 		my $token_string_hr = JSON::XS->new->decode($token_string_json);
-		$session->set('token_string', $token_string_hr);
+		$session->set('oauth2.token_string', $token_string_hr);
 
 		# Redirect.
 		my $res = Plack::Response->new;
@@ -129,8 +129,8 @@ sub _app_logout {
 		my $session = Plack::Session->new($env);
 
 		# Delete token string.
-		if (defined $session->get('token_string')) {
-			$session->remove('token_string');
+		if (defined $session->get('oauth2.token_string')) {
+			$session->remove('oauth2.token_string');
 		}
 
 		# Redirect.
@@ -147,12 +147,12 @@ sub _authorized {
 	my $session = Plack::Session->new($env);
 
 	# No token string.
-	if (! defined $session->get('token_string')) {
+	if (! defined $session->get('oauth2.token_string')) {
 		return 0;
 	}
 
 	# No OAuth2 object.
-	if (! defined $session->get('oauth2')) {
+	if (! defined $session->get('oauth2.obj')) {
 		return 0;
 	}
 
@@ -176,7 +176,7 @@ sub _create_oauth2_object {
 	my $session = Plack::Session->new($env);
 
 	# Object is created in session.
-	if (defined $session->get('oauth2')) {
+	if (defined $session->get('oauth2.obj')) {
 		return;
 	}
 
@@ -206,7 +206,7 @@ sub _create_oauth2_object {
 	if ($self->lwp_user_agent) {
 		$oauth2->set_user_agent($self->lwp_user_agent);
 	}
-	$session->set('oauth2', $oauth2);
+	$session->set('oauth2.obj', $oauth2);
 
 	# Save service provider to session.
 	$session->set('oauth2.service_provider', $self->service_provider);
