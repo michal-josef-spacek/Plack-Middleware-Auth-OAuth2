@@ -12,7 +12,7 @@ use Plack::App::Login;
 use Plack::Response;
 use Plack::Session;
 use Plack::Util::Accessor qw(app_login app_login_url client_id client_secret
-	lwp_user_agent redirect_path scope service_provider);
+	logout_path lwp_user_agent redirect_path scope service_provider);
 
 our $VERSION = 0.01;
 
@@ -31,6 +31,11 @@ sub call {
 	# Auth page.
 	if ($path_info eq '/'.$self->redirect_path) {
 		return $self->_auth_code_app->($env);
+	}
+
+	# Logout page.
+	if ($path_info eq '/'.$self->logout_path) {
+		return $self->_app_logout->($env);
 	}
 
 	# Check authorized.
@@ -79,7 +84,30 @@ sub prepare_app {
 		err 'No service provider.';
 	}
 
+	if (! defined $self->logout_path) {
+		$self->logout_path('logout');
+	}
+
 	return;
+}
+
+sub _app_logout {
+	return sub {
+		my $env = shift;
+
+		my $session = Plack::Session->new($env);
+
+		# Delete token string.
+		if (defined $session->get('token_string')) {
+			$session->remove('token_string');
+		}
+
+		# Redirect.
+		my $res = Plack::Response->new;
+		$res->redirect('/');
+
+		return $res->finalize;
+	};
 }
 
 sub _auth_code_app {
