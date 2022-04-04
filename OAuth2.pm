@@ -30,7 +30,7 @@ sub call {
 
 	# Auth page.
 	if ($path_info eq '/'.$self->redirect_path) {
-		return $self->_auth_code_app->($env);
+		return $self->_app_auth_code->($env);
 	}
 
 	# Logout page.
@@ -91,26 +91,7 @@ sub prepare_app {
 	return;
 }
 
-sub _app_logout {
-	return sub {
-		my $env = shift;
-
-		my $session = Plack::Session->new($env);
-
-		# Delete token string.
-		if (defined $session->get('token_string')) {
-			$session->remove('token_string');
-		}
-
-		# Redirect.
-		my $res = Plack::Response->new;
-		$res->redirect('/');
-
-		return $res->finalize;
-	};
-}
-
-sub _auth_code_app {
+sub _app_auth_code {
 	return sub {
 		my $env = shift;
 
@@ -132,6 +113,25 @@ sub _auth_code_app {
 		my $token_string_json = $session->get('oauth2')->token_string;
 		my $token_string_hr = JSON::XS->new->decode($token_string_json);
 		$session->set('token_string', $token_string_hr);
+
+		# Redirect.
+		my $res = Plack::Response->new;
+		$res->redirect('/');
+
+		return $res->finalize;
+	};
+}
+
+sub _app_logout {
+	return sub {
+		my $env = shift;
+
+		my $session = Plack::Session->new($env);
+
+		# Delete token string.
+		if (defined $session->get('token_string')) {
+			$session->remove('token_string');
+		}
 
 		# Redirect.
 		my $res = Plack::Response->new;
