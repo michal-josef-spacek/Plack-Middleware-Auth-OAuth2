@@ -13,7 +13,7 @@ use Plack::Session;
 use Plack::Util::Accessor qw(app_login app_login_url client_id client_secret
 	logout_path lwp_user_agent redirect_path scope service_provider);
 
-our $VERSION = 0.01;
+our $VERSION = 0.02;
 
 sub call {
 	my ($self, $env) = @_;
@@ -421,6 +421,6 @@ BSD 2-Clause License
 
 =head1 VERSION
 
-0.01
+0.02
 
 =cut
