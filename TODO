@@ -5,11 +5,12 @@ TODO
 array.
 5. Tests with Test::LWP::UserAgent.
 LWP::Authen::OAuth2->set_user_agent();
-7. Default app_login() app?
+7. Default app_login() app? And then default app_login_url()?
 8. Check app_login_url() value.
 9. Automatic HTTPS redirection?
 10. Tests.
-11.
+11. Example to doc.
+12.
 
 Applied
 =======
