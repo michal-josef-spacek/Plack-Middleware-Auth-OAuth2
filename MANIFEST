@@ -18,5 +18,4 @@ OAuth2.pm
 README
 t/Plack-Middleware-Auth-OAuth2/01-use.t
 t/Plack-Middleware-Auth-OAuth2/02-version.t
-xt/Plack-Middleware-Auth-OAuth2/01-pod_coverage.t
-xt/Plack-Middleware-Auth-OAuth2/02-pod.t
+xt/Plack-Middleware-Auth-OAuth2/01-pod.t
