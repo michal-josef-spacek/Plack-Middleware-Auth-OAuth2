@@ -8,7 +8,6 @@ use English;
 use Error::Pure qw(err);
 use JSON::XS;
 use LWP::Authen::OAuth2;
-use Plack::App::Login;
 use Plack::Response;
 use Plack::Session;
 use Plack::Util::Accessor qw(app_login app_login_url client_id client_secret
