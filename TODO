@@ -8,7 +8,8 @@ LWP::Authen::OAuth2->set_user_agent();
 7. Default app_login() app?
 8. Check app_login_url() value.
 9. Automatic HTTPS redirection?
-10.
+10. Tests.
+11.
 
 Applied
 =======
