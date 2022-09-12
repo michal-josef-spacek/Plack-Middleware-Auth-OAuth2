@@ -16,6 +16,7 @@ MANIFEST			This list of files
 META.yml
 OAuth2.pm
 README
+SIGNATURE
 t/Plack-Middleware-Auth-OAuth2/01-use.t
 t/Plack-Middleware-Auth-OAuth2/02-version.t
 xt/Plack-Middleware-Auth-OAuth2/01-pod.t
