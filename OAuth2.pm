@@ -47,8 +47,6 @@ sub call {
 
 	# Unauthorized page.
 	} else {
-		# TODO Nemel bych tady predat nejake dalsi veci?
-
 		$self->app_login_url->($self->app_login,
 			$session->get('oauth2.obj')->authorization_url);
 		return $self->app_login->to_app->($env);
@@ -68,12 +66,10 @@ sub prepare_app {
 
 	if (! defined $self->app_login) {
 		err 'No login application.';
-		# TODO Default login app?
 	}
 
 	if (! defined $self->app_login_url) {
 		err 'No login url call.';
-		# TODO Check
 	}
 
 	if (! defined $self->redirect_path) {
